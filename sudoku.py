@@ -15,3 +15,7 @@ import argparse
 
 def string_matrix(m):
     return "\n".join(" ".join([str(i) for i in row]) for row in m)
+
+class Sudoku(object):
+    def __init__(self, filename):
+        self.matrix, self.max_value, self.block_size = self.read_instance(filename)
