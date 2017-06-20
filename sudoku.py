@@ -42,3 +42,9 @@ class Sudoku(object):
         if int(sqrt(n))**2 != n:
             raise ValueError("Size of a sudoku should be a square number")
         return matrix, n, int(sqrt(n))
+
+    def next_coord(self, i, j):
+        """
+        Return next coordinate in the matrix (left to right, top to bottom)
+        """
+        return (i, j + 1) if j < self.max_value - 1 else (i + 1, 0)
