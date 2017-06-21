@@ -48,3 +48,14 @@ class Sudoku(object):
         Return next coordinate in the matrix (left to right, top to bottom)
         """
         return (i, j + 1) if j < self.max_value - 1 else (i + 1, 0)
+
+    def next_free_coord(self, i, j):
+        """
+        Return next empty coordinate in matrix
+        """
+        try:
+            while self.matrix[i][j]:
+                (i, j) = self.next_coord(i, j)
+        except:
+            i, j = self.max_value, 0
+        return (i, j)
