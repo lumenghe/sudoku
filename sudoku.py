@@ -59,3 +59,13 @@ class Sudoku(object):
         except:
             i, j = self.max_value, 0
         return (i, j)
+
+    def block_range(self, i, j):
+        """
+        Yield all coordinates from the same block
+        """
+        i_offset = self.block_size * (i // self.block_size)
+        j_offset = self.block_size * (j // self.block_size)
+        for k in range(i_offset, i_offset + self.block_size):
+            for l in range(j_offset, j_offset + self.block_size):
+                yield k,l
