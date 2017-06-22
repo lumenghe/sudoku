@@ -69,3 +69,26 @@ class Sudoku(object):
         for k in range(i_offset, i_offset + self.block_size):
             for l in range(j_offset, j_offset + self.block_size):
                 yield k,l
+
+    def check_constraints(self, i, j, working_matrix):
+        """
+        The same integer should not appear twice in the same row, column, block
+        """
+        row_numbers = set()
+        column_numbers = set()
+        block_numbers = set()
+        for k in range(self.max_value):
+            if working_matrix[i][k] in row_numbers:
+                return False
+            elif working_matrix[i][k]:
+                row_numbers.add(working_matrix[i][k])
+            if working_matrix[k][j] in column_numbers:
+                return False
+            elif working_matrix[k][j]:
+                column_numbers.add(working_matrix[k][j])
+        for k, l in self.block_range(i, j):
+            if working_matrix[k][l] in block_numbers:
+                return False
+            elif working_matrix[k][l]:
+                block_numbers.add(working_matrix[k][l])
+        return True
