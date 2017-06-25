@@ -114,3 +114,7 @@ class Sudoku(object):
             else:
                 working_matrix[i][j] = 0
         return None
+
+    def __str__(self):
+        return string_matrix(self.matrix).replace("0", "_")
+
