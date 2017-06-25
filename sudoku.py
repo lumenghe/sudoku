@@ -92,3 +92,25 @@ class Sudoku(object):
             elif working_matrix[k][l]:
                 block_numbers.add(working_matrix[k][l])
         return True
+
+    def solve(self):
+        """
+        We need to find one solution not all the solutions.
+        Candidate value are in working_matrix, and we use backtracking
+        to find a solution.
+        """
+        working_matrix = [list(row) for row in self.matrix]
+        stack = [(self.next_free_coord(0, 0), 0)]
+        while stack:
+            ((i, j), value) = stack.pop()
+            if (i, j) == (self.max_value, 0):
+                return working_matrix
+            if value < self.max_value:
+                working_matrix[i][j] = value + 1
+                stack.append(((i, j), value+1))
+                if self.check_constraints(i, j, working_matrix):
+                    next = self.next_coord(i, j)
+                    stack.append((self.next_free_coord(next[0],next[1]), 0))
+            else:
+                working_matrix[i][j] = 0
+        return None
