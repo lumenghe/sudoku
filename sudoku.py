@@ -118,3 +118,14 @@ class Sudoku(object):
     def __str__(self):
         return string_matrix(self.matrix).replace("0", "_")
 
+
+if __name__=="__main__":
+    parser = argparse.ArgumentParser(description="Sudoku solver")
+    parser.add_argument("-f", "--file", help="Soduku instance", type=str, required=True)
+    args = parser.parse_args()
+    sudoku = Sudoku(args.file)
+    sol = sudoku.solve()
+    if sol is not None:
+        print(string_matrix(sol))
+    else:
+        print("NO SOLUTION")
